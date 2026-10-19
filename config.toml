@@ -1,0 +1,3 @@
+[functions.print-files]
+# The function verifies Firebase ID tokens itself via accounts:lookup.
+verify_jwt = false

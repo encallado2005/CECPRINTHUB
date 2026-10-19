@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CECPRINTHUB | Printing Services</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══ CUSTOM MODAL (replaces all window.alert / window.confirm) ═══ -->
+<div id="modal-backdrop" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <div class="modal-icon-wrap" id="modal-icon-wrap"><span id="modal-icon">ℹ</span></div>
+    <h3 id="modal-title">Notice</h3>
+    <p id="modal-body"></p>
+    <div class="modal-actions" id="modal-actions">
+      <button class="btn btn-primary" id="modal-ok">OK</button>
+    </div>
+  </div>
+</div>
+
+<header class="topbar">
+  <a class="brand" href="#" id="brand-logo" data-go="home">
+    <span class="brand-icon">▣</span>
+    <span><strong>CEC<span>PRINT</span>HUB</strong><small>PRINTING SERVICES</small></span>
+  </a>
+  <div class="top-actions">
+    <span id="session-label" class="session-label"></span>
+    <button id="logout-btn" class="btn btn-ghost hidden">Log out</button>
+  </div>
+</header>
+
+<main class="shell">
+
+<!-- AUTH -->
+<section id="auth-page" class="page auth-layout">
+  <div class="welcome-panel">
+    <span class="eyebrow">YOUR IDEAS, PRINTED RIGHT</span>
+    <h1>Good prints.<br><span>Great impressions.</span></h1>
+    <video class="landing-video" controls playsinline preload="metadata" aria-label="CECPRINTHUB introduction video">
+      <source src="assets/landing-video.mp4" type="video/mp4">
+      Your browser does not support embedded videos. Please use a modern browser to watch this video.
+    </video>
+  </div>
+  <div class="auth-card">
+    <div class="tabs">
+      <button class="tab active" data-auth="login">Log in</button>
+      <button class="tab" data-auth="register">Create account</button>
+      <button class="tab" data-auth="admin">Admin</button>
+    </div>
+    <form id="login-form" class="auth-form">
+      <h2>Welcome back</h2><p class="muted">Log in to start or check your orders.</p>
+      <label>Email address<input type="email" id="login-email" required placeholder="you@example.com"></label>
+      <label>Password<span class="password-wrap"><input type="password" id="login-password" required placeholder="Enter your password"><button type="button" class="password-toggle" data-toggle-password="login-password">Show</button></span></label>
+      <button class="btn btn-primary full" type="submit">Log in <span>→</span></button>
+      <p class="form-note">New here? <button type="button" class="inline-link" data-auth="register">Create an account</button></p>
+    </form>
+    <form id="register-form" class="auth-form hidden">
+      <h2>Create your account</h2><p class="muted">A few details and you're ready to print.</p>
+      <label>Full name<input id="reg-name" required placeholder="Your full name"></label>
+      <label>Email address<input type="email" id="reg-email" required placeholder="you@example.com"></label>
+      <label>Password<span class="password-wrap"><input type="password" id="reg-password" minlength="6" required placeholder="At least 6 characters"><button type="button" class="password-toggle" data-toggle-password="reg-password">Show</button></span></label>
+      <button class="btn btn-primary full" type="submit">Create account <span>→</span></button>
+      <p class="form-note">Already registered? <button type="button" class="inline-link" data-auth="login">Log in</button></p>
+    </form>
+    <form id="admin-form" class="auth-form hidden">
+      <h2>Admin sign in</h2><p class="muted">Sign in with your admin account to manage orders.</p>
+      <label>Admin email<input type="email" id="admin-email" required placeholder="admin@example.com"></label>
+      <label>Password<span class="password-wrap"><input type="password" id="admin-password" required placeholder="Admin password"><button type="button" class="password-toggle" data-toggle-password="admin-password">Show</button></span></label>
+      <button class="btn btn-dark full" type="submit">Open admin panel <span>→</span></button>
+      <p class="form-note">Customer? <button type="button" class="inline-link" data-auth="login">Return to customer login</button></p>
+    </form>
+    <div id="auth-message" class="message hidden" role="status"></div>
+  </div>
+</section>
+
+<!-- HOME -->
+<section id="home-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">CUSTOMER HOME</span><h1>What can we print for you?</h1><p class="muted">Choose a service to get started. We'll have it ready for you to pick up.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="notice" id="customer-notice"></div>
+  <div class="service-grid">
+    <button class="service-card" data-service="Documents"><span class="service-icon">▤</span><b>Documents</b><small>Print files and paperwork</small><span class="card-arrow">↗</span></button>
+    <button class="service-card" data-service="Photocopying"><span class="service-icon">▧</span><b>Photocopying</b><small>Clear copies, made easy</small><span class="card-arrow">↗</span></button>
+    <button class="service-card" data-service="Posters"><span class="service-icon">▣</span><b>Posters</b><small>Make your message stand out</small><span class="card-arrow">↗</span></button>
+    <button class="service-card" data-service="IDs &amp; Forms"><span class="service-icon">▤</span><b>IDs &amp; Forms</b><small>IDs, forms and documents</small><span class="card-arrow">↗</span></button>
+    <button class="service-card" data-service="Tarpaulin / Others"><span class="service-icon">✦</span><b>Tarpaulin / Others</b><small>Custom print requests</small><span class="card-arrow">↗</span></button>
+  </div>
+  <div class="home-links-heading"><span class="home-links-sparkle">✦</span><div><span class="eyebrow">GOOD TO KNOW</span><h2>Get to know us</h2><p>Learn about our services or find your way to our store.</p></div></div>
+  <div class="home-bottom">
+    <button class="info-card about-info-card" data-go="about"><span class="info-icon">i</span><span><b>About CECPRINTHUB</b><small>Learn about our services</small></span><span>→</span></button>
+    <button class="info-card location-info-card" data-go="location"><span class="info-icon">⌖</span><span><b>Visit our store</b><small>40 Leon Kilat Street, Cebu City</small></span><span>↗</span></button>
+    <button class="info-card" data-go="orders"><span class="info-icon">▣</span><span><b>My orders</b><small>View your order history and updates</small></span><span>→</span></button>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">PLACE AN ORDER</span><h1>Let's get it printed.</h1><p class="muted">Tell us what you need. You can review everything before submitting.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="form-card">
+    <div class="step-label"><span>01</span> SERVICE DETAILS</div>
+    <form id="order-form">
+      <div class="form-grid">
+        <label>Printing service
+          <select id="service-type" required>
+            <option value="">Choose a service</option>
+            <option>Documents</option>
+            <option>Photocopying</option>
+            <option>Posters</option>
+            <option>IDs &amp; Forms</option>
+            <option>Tarpaulin / Others</option>
+          </select>
+        </label>
+        <label>Quantity<input type="number" id="quantity" min="1" max="10000" value="1" required></label>
+        <label class="wide">Print details / instructions<textarea id="details" required rows="3" placeholder="e.g. A4, black and white, double-sided..."></textarea></label>
+        <!-- File input — accept attribute is updated dynamically by JS based on selected service -->
+        <label class="wide" id="file-label">
+          Attach a file <span id="file-hint" class="file-hint">(PDF, DOC, DOCX, TXT — max 750 KB)</span>
+          <input id="order-file" type="file" required accept=".pdf,.doc,.docx,.txt">
+        </label>
+        <label>Pickup date<input type="date" id="pickup-date" required></label>
+        <label>Pickup time
+          <select id="pickup-time" required>
+            <option value="">Choose a time</option>
+            <option>9:00 AM – 11:00 AM</option>
+            <option>11:00 AM – 1:00 PM</option>
+            <option>1:00 PM – 3:00 PM</option>
+            <option>3:00 PM – 5:00 PM</option>
+          </select>
+        </label>
+      </div>
+      <div class="pickup-callout"><span>⌖</span><div><b>Pickup only — no delivery</b><p>You'll collect your finished order at our store in Cebu City.</p></div></div>
+      <div class="form-footer">
+        <button type="button" class="btn btn-ghost" data-back>Cancel</button>
+        <button class="btn btn-primary" type="submit">Review order <span>→</span></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section id="checkout-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">FINAL CHECK</span><h1>Review your order.</h1><p class="muted">Please check your details before sending your request.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="form-card">
+    <div id="order-summary" class="summary-list"></div>
+    <div class="pickup-callout"><span>⌖</span><div><b>Store pickup only</b><p>No delivery service is available. Please come to the store at your selected pickup time.</p></div></div>
+    <div class="form-footer">
+      <button class="btn btn-ghost" data-go="order">← Edit details</button>
+      <button id="submit-order" class="btn btn-primary">Submit order <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- MY ORDERS -->
+<section id="orders-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">YOUR PRINTING ACTIVITY</span><h1>My orders</h1><p class="muted">Check the progress of your submitted orders.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div id="my-orders" class="orders-list"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">A LITTLE ABOUT US</span><h1>Print with confidence.</h1><p class="muted">A simple, convenient way to get your printing done.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="about-panel">
+    <div class="about-mark">CPH<span>✦</span></div>
+    <div>
+      <h2>Welcome to CECPRINTHUB</h2>
+      <p>CECPRINTHUB Printing Services helps customers prepare everyday print needs, from documents and photocopies to posters, IDs, forms, tarpaulin and other custom requests. Submit your details online, choose a pickup schedule, and visit our store to collect your order.</p>
+      <div class="about-points">
+        <div><b>01</b><span><strong>Simple ordering</strong><small>Choose a service and provide your print instructions.</small></span></div>
+        <div><b>02</b><span><strong>Order updates</strong><small>Check your order status from your account.</small></span></div>
+        <div><b>03</b><span><strong>Pickup at our store</strong><small>We do not offer delivery. Customer pickup only.</small></span></div>
+      </div>
+      <button class="btn btn-primary" data-go="order">Start an order <span>→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">COME SAY HELLO</span><h1>Find our store.</h1><p class="muted">Your order will be collected in person at this location.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="location-layout">
+    <div class="map-visual"><div class="map-grid"></div><div class="map-pin">⌖</div><div class="map-label">CECPRINTHUB<br><small>PRINTING SERVICES</small></div></div>
+    <div class="location-info">
+      <span class="eyebrow">STORE ADDRESS</span>
+      <h2>CECPRINTHUB Printing Services</h2>
+      <p>40 Leon Kilat Street (corner of Dimasalang Street), Pahina Central, downtown Cebu City, Philippines 6000.</p>
+      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=40+Leon+Kilat+Street+corner+of+Dimasalang+Street+Pahina+Central+Cebu+City+6000+Philippines" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+      <div class="pickup-callout"><span>!</span><div><b>Pickup only — no delivery</b><p>Please visit the store to collect your completed order.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN -->
+<section id="admin-page" class="page hidden">
+  <div class="page-heading">
+    <div><span class="eyebrow">CECPRINTHUB MANAGEMENT</span><h1>Admin panel</h1><p class="muted">Manage orders, track status, and oversee your printing services.</p></div>
+    <button class="btn btn-ghost back-btn" data-back>← Back</button>
+  </div>
+  <div class="admin-stats">
+    <div><small>Total</small><strong id="stat-total">0</strong></div>
+    <div><small>Pending</small><strong id="stat-pending">0</strong></div>
+    <div><small>Processing</small><strong id="stat-processing">0</strong></div>
+    <div><small>Ready</small><strong id="stat-ready">0</strong></div>
+    <div><small>Completed</small><strong id="stat-completed">0</strong></div>
+  </div>
+  <div class="admin-toolbar">
+    <div class="admin-filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="pending">Pending</button>
+      <button class="filter-btn" data-filter="processing">Processing</button>
+      <button class="filter-btn" data-filter="ready">Ready</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+      <button class="filter-btn" data-filter="cancelled">Cancelled</button>
+    </div>
+    <div class="admin-toolbar-actions">
+      <input type="text" id="admin-search" placeholder="Search orders..." class="admin-search-input">
+      <button class="btn btn-ghost" id="refresh-orders">↻ Refresh</button>
+    </div>
+  </div>
+  <div id="admin-orders" class="orders-list"></div>
+  <div class="admin-management-section">
+    <div class="admin-section-heading">
+      <span class="eyebrow">ADMINISTRATION</span>
+      <h2>Admin Accounts</h2>
+      <p class="muted">Manage who has admin access to the dashboard.</p>
+    </div>
+    <div id="admin-list" class="admin-accounts-list"></div>
+    <div class="admin-add-form">
+      <input type="email" id="new-admin-email" placeholder="Enter email to add as admin">
+      <button class="btn btn-primary btn-sm" id="add-admin-btn">+ Add Admin</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div><b>CEC<span>PRINT</span>HUB</b><small>Printing Services · Cebu City, Philippines</small></div>
+  <div class="footer-links"><button data-go="about">About</button><button data-go="location">Location</button></div>
+  <p>© <span id="year"></span> CECPRINTHUB. Print it. Pick it up.</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script type="module" src="cloud-app.js"></script>
+</body>
+</html>
